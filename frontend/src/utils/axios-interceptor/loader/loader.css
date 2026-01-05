@@ -1,0 +1,35 @@
+:root {
+  --loader-color: #3d5af1;
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  background: rgba(40, 40, 40, 0.834);
+  z-index: 99999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 8px solid;
+  border-color: var(--loader-color) transparent var(--loader-color) transparent;
+  border-radius: 50%;
+  animation: spin-anim 1.2s linear infinite;
+}
+
+@keyframes spin-anim {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

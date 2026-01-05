@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    
+    /* New way to handle path aliases */
+    "rootDir": ".",
+    
+    /* Path Aliases without baseUrl */
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/hooks/*": ["./src/components/hooks/*"],
+      "@/interfaces/*": ["./src/components/interfaces/*"],
+      "@/layouts/*": ["./src/components/layouts/*"],
+      "@/pages/*": ["./src/components/pages/*"],
+      "@/router/*": ["./src/components/router/*"],
+      "@/store/*": ["./src/components/store/*"],
+      "@/utils/*": ["./src/components/utils/*"]
+    },
+    
+    /* Add this to suppress deprecation warnings */
+    "ignoreDeprecations": "6.0"
+  },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
