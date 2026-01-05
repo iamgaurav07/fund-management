@@ -17,8 +17,8 @@ import { Card } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
 import useAxios from 'axios-hooks';
 import { login } from '@/apis/auth';
-import { useDispatch } from 'react-redux';
 import { setUserLoginData } from '@/store/slices/persistedSlice';
+import { useDispatch } from 'react-redux';
 
 const LoginPage = () => {
   const dispatch = useDispatch();

@@ -3,12 +3,12 @@ import Axios, { AxiosError, AxiosRequestHeaders } from "axios";
 import { IAxiosInterceptor, IErrorResponse } from "./interfaces";
 import Loader from "./loader";
 import toast, { Toaster } from "react-hot-toast";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 const process = import.meta.env;
 
-let jwtToken: string = "";
-
-export const setDefaultAxiosConfig = (
+const setDefaultAxiosConfig = (
   baseURL?: string,
   headers?: AxiosRequestHeaders | Record<string, string>,
   timeout?: number
@@ -21,10 +21,6 @@ export const setDefaultAxiosConfig = (
     };
   }
   if (timeout) Axios.defaults.timeout = timeout;
-};
-
-export const setToken = (token: string): void => {
-  jwtToken = token;
 };
 
 export const errorToast = (message: string) => {
@@ -83,6 +79,7 @@ const AxiosInterceptor: React.FC<IAxiosInterceptor> = ({
   const { BASE_URL, HEADERS, TIMEOUT } = config || {};
   const [loading, setLoading] = useState(false);
   const [activeRequests, setActiveRequests] = useState(0);
+  const { token } = useSelector((state: RootState) => state.persistedSlice);
 
   // Helper: Should show loader for this request?
   const shouldShowLoader = (url: string | undefined): boolean => {
@@ -112,12 +109,12 @@ const AxiosInterceptor: React.FC<IAxiosInterceptor> = ({
         request.headers = {} as AxiosRequestHeaders;
       }
       // Add X-COMPANY header to every request
-      request.headers["X-COMPANY"] = process.VITE_COMPANY;
+      request.headers["X-FUND"] = process.VITE_COMPANY;
 
-      if (jwtToken && window.location.pathname.startsWith("/admin")) {
+      if (token && window.location.pathname.startsWith("/funds")) {
         request.headers = {
           ...request.headers,
-          Authorization: `Bearer ${jwtToken}`,
+          Authorization: `Bearer ${token}`,
         } as AxiosRequestHeaders;
       } else if (request.headers) {
         delete request.headers.Authorization;
