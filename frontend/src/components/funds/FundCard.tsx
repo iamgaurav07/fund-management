@@ -2,9 +2,12 @@ import { Edit, Trash2, MoreVertical, DollarSign, Calendar, Percent, TrendingUp, 
 import { Fund } from '../../interfaces/fund';
 import { cn } from '@/utils';
 import { useNavigate } from 'react-router-dom';
+import { setFundId } from '../../store/slices/persistedSlice';
+import { useDispatch } from 'react-redux';
 
 const FundCard = ({ fund, onEdit, onDelete }: { fund: Fund; onEdit: (fund: Fund) => void; onDelete: (fund: Fund) => void }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const formatCurrency = (amount: number, currency: string) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -23,6 +26,11 @@ const FundCard = ({ fund, onEdit, onDelete }: { fund: Fund; onEdit: (fund: Fund)
       default: return 'bg-gray-100 text-gray-800 border-gray-200';
     }
   };
+
+  const viewDetailsHandler = () => {
+    dispatch(setFundId(fund.id));
+    navigate(`/funds/${fund.id}/dashboard`)
+  }
 
   return (
     <div className="bg-white rounded-xl border border-gray-200 hover:border-primary-300 hover:shadow-lg transition-all duration-300 overflow-hidden group">
@@ -112,7 +120,7 @@ const FundCard = ({ fund, onEdit, onDelete }: { fund: Fund; onEdit: (fund: Fund)
               </div>
             </div>
           </div>
-          <button className="text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors flex items-center gap-1 cursor-pointer" onClick={() => navigate(`/funds/${fund.id}/dashboard`)}>
+          <button className="text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors flex items-center gap-1 cursor-pointer" onClick={viewDetailsHandler}>
             View Details <ChevronRight className="w-4 h-4" />
           </button>
         </div>

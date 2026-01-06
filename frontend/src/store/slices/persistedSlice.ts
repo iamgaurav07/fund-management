@@ -7,6 +7,7 @@ interface UserState {
   isVerified: boolean;
   role: string | null;
   useId: string | null;
+  fundId: string | null;
 }
 
 const initialState: UserState = {
@@ -15,6 +16,7 @@ const initialState: UserState = {
   isVerified: false,
   role: null,
   useId: null,
+  fundId: null
 };
 
 const persistedSlice = createSlice({
@@ -36,8 +38,11 @@ const persistedSlice = createSlice({
       state.role = null;
       state.useId = null;
     },
+    setFundId: (state, action: PayloadAction<any>) => {
+        state.fundId = action.payload;
+    }
   },
 });
 
-export const { setUserLoginData, setLogout } = persistedSlice.actions;
+export const { setUserLoginData, setLogout, setFundId } = persistedSlice.actions;
 export default persistedSlice.reducer;
