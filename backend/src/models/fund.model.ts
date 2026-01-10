@@ -8,8 +8,9 @@ const fundSchema = new Schema<IFund>(
     fundSize: { type: Number, required: true },
     vintageYear: { type: Number, required: true },
     managementFee: { type: Number, required: true },
-    carryFee: { type: Number, required: true },
-    currency: { type: String, enum: ['USD', 'EUR', 'GBP'], required: true },
+    carry: { type: Number, required: true },
+    currency: { type: String, enum: ['USD', 'EUR', 'GBP', 'INR', 'CAD', 'AUD'], required: true },
+    status: { type: Number, enum: [0,1,2,3], required: true },
   },
   {
     timestamps: true, // Adds createdAt and updatedAt automatically
