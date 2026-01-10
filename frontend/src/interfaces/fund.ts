@@ -1,4 +1,4 @@
-export type Currency = 'USD' | 'EUR' | 'GBP' | 'JPY' | 'CAD' | 'AUD';
+export type Currency = 'USD' | 'EUR' | 'GBP' | 'INR' | 'CAD' | 'AUD';
 export type FundStatus = 'DRAFT' | 'OPEN' | 'CLOSED' | 'LIQUIDATED';
 
 export interface Fund {

@@ -2,6 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import sessionStorage from "redux-persist/lib/storage/session";
 import persistedSlice from "./slices/persistedSlice";
+import fundSliceReducer from "./slices/fundSlice";
 
 const persistedSliceConfig = {
   key: "user",
@@ -15,6 +16,7 @@ const persistedSliceReducer = persistReducer(
 
 const rootReducer = combineReducers({
   persistedSlice: persistedSliceReducer,
+  fundSlice: fundSliceReducer
 });
 
 // Create store with persisted reducer

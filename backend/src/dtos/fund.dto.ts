@@ -2,7 +2,7 @@ import { IsString, IsNumber, IsOptional, IsEnum, Min, Max } from 'class-validato
 
 export class CreateFundDto {
   @IsString()
-  fundName!: string;
+  name!: string;
 
   @IsString()
   @IsOptional()
@@ -20,24 +20,24 @@ export class CreateFundDto {
   @IsNumber()
   @Min(0)
   @Max(100)
-  managementFee!: number;
+  managementFeePercent!: number;
 
   @IsNumber()
   @Min(0)
   @Max(100)
-  carry!: number;
+  carryPercent!: number;
 
   @IsEnum(['USD', 'EUR', 'GBP', 'INR', 'CAD', 'AUD'])
   currency!: 'USD' | 'EUR' | 'GBP' | 'INR' | 'CAD' | 'AUD';
 
-  @IsEnum([0, 1, 2, 3])
-  status!: 0 | 1 | 2 | 3;
+  @IsEnum(['DRAFT', 'OPEN', 'CLOSED', 'LIQUIDATED'])
+  status!: 'DRAFT' | 'OPEN' | 'CLOSED' | 'LIQUIDATED';
 }
 
 export class UpdateFundDto {
   @IsString()
   @IsOptional()
-  fundName?: string;
+  name?: string;
 
   @IsString()
   @IsOptional()
@@ -58,19 +58,19 @@ export class UpdateFundDto {
   @Min(0)
   @Max(100)
   @IsOptional()
-  managementFee?: number;
+  managementFeePercent?: number;
 
   @IsNumber()
   @Min(0)
   @Max(100)
   @IsOptional()
-  carry?: number;
+  carryPercent?: number;
 
   @IsEnum(['USD', 'EUR', 'GBP', 'INR', 'CAD', 'AUD'])
   @IsOptional()
   currency?: 'USD' | 'EUR' | 'GBP' | 'INR' | 'CAD' | 'AUD';
 
-  @IsEnum([0, 1, 2, 3])
+  @IsEnum(['DRAFT', 'OPEN', 'CLOSED', 'LIQUIDATED'])
   @IsOptional()
-  status?: 0 | 1 | 2 | 3;
+  status?: 'DRAFT' | 'OPEN' | 'CLOSED' | 'LIQUIDATED';
 }

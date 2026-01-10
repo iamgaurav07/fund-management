@@ -3,10 +3,6 @@ import { useState, useEffect } from 'react';
 import { X, Save, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Fund, FundFormData, Currency, FundStatus } from '../../interfaces/fund';
-
-const CURRENT_YEAR = new Date().getFullYear();
-const YEARS = Array.from({ length: 11 }, (_, i) => CURRENT_YEAR + i - 5); // 5 years back, 5 years forward
-
 // FundDialog Component
 const FundDialog = ({ isOpen, onClose, onSubmit, fund, isLoading = false }: { 
   isOpen: boolean; 
@@ -15,10 +11,10 @@ const FundDialog = ({ isOpen, onClose, onSubmit, fund, isLoading = false }: {
   fund?: Fund | null; 
   isLoading?: boolean; 
 }) => {
-  const CURRENCIES: Currency[] = ['USD', 'EUR', 'GBP', 'JPY', 'CAD', 'AUD'];
+  const CURRENCIES: Currency[] = ['USD', 'EUR', 'GBP', 'INR', 'CAD', 'AUD'];
   const STATUS_OPTIONS: FundStatus[] = ['DRAFT', 'OPEN', 'CLOSED', 'LIQUIDATED'];
   const CURRENT_YEAR = new Date().getFullYear();
-  const YEARS = Array.from({ length: 11 }, (_, i) => CURRENT_YEAR + i - 5);
+  const YEARS = Array.from({ length: 30 }, (_, i) => CURRENT_YEAR + i - 20);
 
   const [formData, setFormData] = useState<FundFormData>({
     name: '',
@@ -58,7 +54,7 @@ const FundDialog = ({ isOpen, onClose, onSubmit, fund, isLoading = false }: {
       });
     }
     setErrors({});
-  }, [fund, isOpen]);
+  }, [CURRENT_YEAR, fund, isOpen]);
 
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {};

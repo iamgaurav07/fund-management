@@ -9,12 +9,12 @@ export class FundService {
     const funds = await Fund.find().lean();
     return funds.map((fund) => ({
       _id: fund._id.toString(),
-      fundName: fund.fundName,
+      name: fund.name,
       description: fund.description,
       fundSize: fund.fundSize,
       vintageYear: fund.vintageYear,
-      managementFee: fund.managementFee,
-      carry: fund.carry,
+      managementFeePercent: fund.managementFeePercent,
+      carryPercent: fund.carryPercent,
       currency: fund.currency,
       status: fund.status,
       createdAt: fund.createdAt,
@@ -34,12 +34,12 @@ export class FundService {
 
     return {
       _id: fund._id.toString(),
-      fundName: fund.fundName,
+      name: fund.name,
       description: fund.description,
       fundSize: fund.fundSize,
       vintageYear: fund.vintageYear,
-      managementFee: fund.managementFee,
-      carry: fund.carry,
+      managementFeePercent: fund.managementFeePercent,
+      carryPercent: fund.carryPercent,
       currency: fund.currency,
       status: fund.status,
       createdAt: fund.createdAt,
@@ -53,21 +53,21 @@ export class FundService {
     }
 
     // Check if fund with same name already exists
-    const existingFund = await Fund.findOne({ fundName: fundData.fundName });
+    const existingFund = await Fund.findOne({ fundName: fundData.name });
     if (existingFund) {
-      throw new HttpException(409, `Fund with name "${fundData.fundName}" already exists`);
+      throw new HttpException(409, `Fund with name "${fundData.name}" already exists`);
     }
 
     const createdFund = await Fund.create(fundData);
 
     return {
       _id: createdFund._id.toString(),
-      fundName: createdFund.fundName,
+      name: createdFund.name,
       description: createdFund.description,
       fundSize: createdFund.fundSize,
       vintageYear: createdFund.vintageYear,
-      managementFee: createdFund.managementFee,
-      carry: createdFund.carry,
+      managementFeePercent: createdFund.managementFeePercent,
+      carryPercent: createdFund.carryPercent,
       currency: createdFund.currency,
       status: createdFund.status,
       createdAt: createdFund.createdAt,
@@ -81,24 +81,24 @@ export class FundService {
     }
 
     // Check if fund name is being updated and if it already exists
-    if (fundData.fundName) {
+    if (fundData.name) {
       const existingFund = await Fund.findOne({
-        fundName: fundData.fundName,
+        fundName: fundData.name,
         _id: { $ne: fundId },
       });
       if (existingFund) {
-        throw new HttpException(409, `Fund with name "${fundData.fundName}" already exists`);
+        throw new HttpException(409, `Fund with name "${fundData.name}" already exists`);
       }
     }
 
     // Create update object without undefined fields
     const updateData: any = {};
-    if (fundData.fundName) updateData.fundName = fundData.fundName;
+    if (fundData.name) updateData.name = fundData.name;
     if (fundData.description !== undefined) updateData.description = fundData.description;
     if (fundData.fundSize !== undefined) updateData.fundSize = fundData.fundSize;
     if (fundData.vintageYear !== undefined) updateData.vintageYear = fundData.vintageYear;
-    if (fundData.managementFee !== undefined) updateData.managementFee = fundData.managementFee;
-    if (fundData.carry !== undefined) updateData.carry = fundData.carry;
+    if (fundData.managementFeePercent !== undefined) updateData.managementFeePercent = fundData.managementFeePercent;
+    if (fundData.carryPercent !== undefined) updateData.carryPercent = fundData.carryPercent;
     if (fundData.currency) updateData.currency = fundData.currency;
     if (fundData.status !== undefined) updateData.status = fundData.status;
 
@@ -113,12 +113,12 @@ export class FundService {
 
     return {
       _id: updatedFund._id.toString(),
-      fundName: updatedFund.fundName,
+      name: updatedFund.name,
       description: updatedFund.description,
       fundSize: updatedFund.fundSize,
       vintageYear: updatedFund.vintageYear,
-      managementFee: updatedFund.managementFee,
-      carry: updatedFund.carry,
+      managementFeePercent: updatedFund.managementFeePercent,
+      carryPercent: updatedFund.carryPercent,
       currency: updatedFund.currency,
       status: updatedFund.status,
       createdAt: updatedFund.createdAt,
@@ -162,12 +162,12 @@ export class FundService {
     const funds = await Fund.find(query).lean();
     return funds.map((fund) => ({
       _id: fund._id.toString(),
-      fundName: fund.fundName,
+      name: fund.name,
       description: fund.description,
       fundSize: fund.fundSize,
       vintageYear: fund.vintageYear,
-      managementFee: fund.managementFee,
-      carry: fund.carry,
+      managementFeePercent: fund.managementFeePercent,
+      carryPercent: fund.carryPercent,
       currency: fund.currency,
       status: fund.status,
       createdAt: fund.createdAt,
