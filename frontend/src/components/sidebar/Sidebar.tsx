@@ -11,11 +11,11 @@ import {
   LogOut,
   ChevronRight,
   Calendar,
-  CreditCard,
-  Building,
   Zap,
 } from 'lucide-react';
 import { cn } from '@/utils';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 interface SidebarProps {
   isCollapsed: boolean;
@@ -95,6 +95,9 @@ const SectionHeader = ({ title, isCollapsed, isMobile }: SectionHeaderProps) => 
 };
 
 const Sidebar = ({ isCollapsed, isMobile = false, onClose }: SidebarProps) => {
+
+  const { fundId: persistedFundId } = useSelector((state: RootState) => state.persistedSlice);
+
   const menuItems = [
     {
       title: 'Dashboard',
@@ -105,14 +108,14 @@ const Sidebar = ({ isCollapsed, isMobile = false, onClose }: SidebarProps) => {
     {
       title: 'Investments',
       icon: <PieChart className="w-4 h-4" />,
-      path: '/funds/1/investments',
+      path: `/funds/${persistedFundId}/investments`,
       badge: '1',
       badgeColor: 'bg-emerald-100 text-emerald-800',
     },
     {
       title: 'Transactions',
       icon: <TrendingUp className="w-4 h-4" />,
-      path: '/funds/1/transactions',
+      path: `/funds/${persistedFundId}/transactions`,
       badge: null,
     },
     {
@@ -131,19 +134,6 @@ const Sidebar = ({ isCollapsed, isMobile = false, onClose }: SidebarProps) => {
   ];
 
   const fundManagementItems = [
-    {
-      title: 'Funds',
-      icon: <Building className="w-4 h-4" />,
-      path: '/funds',
-      badge: null,
-    },
-    {
-      title: 'Transactions',
-      icon: <CreditCard className="w-4 h-4" />,
-      path: '/transactions',
-      badge: '24',
-      badgeColor: 'bg-purple-100 text-purple-800',
-    },
     {
       title: 'Analytics',
       icon: <BarChart3 className="w-4 h-4" />,

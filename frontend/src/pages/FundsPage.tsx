@@ -285,7 +285,7 @@ const FundsPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5">
             {filteredFunds.map((fund) => (
               <FundCard
-                key={fund.id}
+                key={fund._id}
                 fund={fund}
                 onEdit={handleEditFund}
                 onDelete={handleDeleteFund}

@@ -28,8 +28,8 @@ const FundCard = ({ fund, onEdit, onDelete }: { fund: Fund; onEdit: (fund: Fund)
   };
 
   const viewDetailsHandler = () => {
-    dispatch(setFundId(fund.id));
-    navigate(`/funds/${fund.id}/dashboard`)
+    dispatch(setFundId(fund._id));
+    navigate(`/funds/${fund._id}/dashboard`)
   }
 
   return (

@@ -1,6 +1,7 @@
 import { Edit, Trash2, MoreVertical, Eye } from 'lucide-react';
-import { Transaction, Fund } from '../../interfaces/transaction';
+import { Transaction } from '../../interfaces/transaction';
 import { cn } from '@/utils';
+import { Fund } from '../../interfaces/fund';
 
 interface TransactionsTableProps {
   transactions: Transaction[];
@@ -112,9 +113,9 @@ const TransactionsTable = ({
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {transactions.map((transaction) => (
+            {transactions.map((transaction: Transaction) => (
               <tr 
-                key={transaction.id} 
+                key={transaction._id} 
                 className="hover:bg-gray-50 transition-colors duration-150 group"
               >
                 {/* Transaction ID */}
@@ -132,7 +133,7 @@ const TransactionsTable = ({
                     </div>
                     <div>
                       <p className="text-sm font-medium text-gray-900">
-                        TX-{transaction.id.slice(-6).toUpperCase()}
+                        TX-{transaction._id.slice(-6).toUpperCase()}
                       </p>
                       <p className="text-xs text-gray-500">
                         Created {formatDate(transaction.createdAt)}

@@ -3,6 +3,7 @@ import { persistStore, persistReducer } from "redux-persist";
 import sessionStorage from "redux-persist/lib/storage/session";
 import persistedSlice from "./slices/persistedSlice";
 import fundSliceReducer from "./slices/fundSlice";
+import transactionReducer from "./slices/transactionSlice";
 
 const persistedSliceConfig = {
   key: "user",
@@ -16,7 +17,8 @@ const persistedSliceReducer = persistReducer(
 
 const rootReducer = combineReducers({
   persistedSlice: persistedSliceReducer,
-  fundSlice: fundSliceReducer
+  fundSlice: fundSliceReducer,
+  transactionSlice: transactionReducer
 });
 
 // Create store with persisted reducer

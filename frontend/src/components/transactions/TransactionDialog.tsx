@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { X, Calendar, DollarSign, FileText, Building, Check, AlertCircle } from 'lucide-react';
+import { X, Calendar, FileText, Building, Check, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Label } from '@/components/ui/Label';
 import { Textarea } from '@/components/ui/Taxtarea';
 import { Badge } from '@/components/ui/Badge';
-import { Transaction, TransactionFormData, TransactionType, Fund } from '@/interfaces/transaction';
+import { Transaction, TransactionFormData, TransactionType } from '../../interfaces/transaction';
+import { Fund } from '../../interfaces/fund';
 
 interface TransactionDialogProps {
   isOpen: boolean;
@@ -53,10 +54,10 @@ const TransactionDialog = ({
   isLoading = false 
 }: TransactionDialogProps) => {
   const [formData, setFormData] = useState<TransactionFormData>({
-    fundId: fund.id,
-    type: 'CAPITAL_CALL',
+    fundId: fund._id,
+    type: 'CAPITAL_CALL' as TransactionType,
     amount: '',
-    currency: fund.currency,
+    currency: fund.currency || 'USD',
     date: new Date().toISOString().split('T')[0],
     description: '',
   });
@@ -76,10 +77,10 @@ const TransactionDialog = ({
       });
     } else {
       setFormData({
-        fundId: fund.id,
+        fundId: fund._id,
         type: 'CAPITAL_CALL',
         amount: '',
-        currency: fund.currency,
+        currency: fund.currency || 'USD',
         date: new Date().toISOString().split('T')[0],
         description: '',
       });
@@ -88,7 +89,7 @@ const TransactionDialog = ({
     setTouched({});
   }, [transaction, fund, isOpen]);
 
-  const validateField = (name: string, value: any): string => {
+  const validateField = (name: string, value: number | string | null | undefined): string => {
     switch (name) {
       case 'amount':
         if (!value) return 'Amount is required';
@@ -273,7 +274,7 @@ const TransactionDialog = ({
                   <Input
                     id="amount"
                     name="amount"
-                    type="text"
+                  type="text"
                     value={formData.amount}
                     onChange={(e) => {
                       const formatted = formatAmount(e.target.value);

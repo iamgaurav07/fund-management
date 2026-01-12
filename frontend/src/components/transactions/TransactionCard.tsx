@@ -1,6 +1,7 @@
 import { Edit, Trash2, MoreVertical, DollarSign, Calendar, Tag, Building } from 'lucide-react';
-import { Transaction, Fund } from '../../interfaces/transaction';
+import { Transaction } from '../../interfaces/transaction';
 import { cn } from '@/utils';
+import { Fund } from '../../interfaces/fund';
 
 interface TransactionCardProps {
   transaction: Transaction;
